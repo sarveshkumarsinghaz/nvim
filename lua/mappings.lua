@@ -30,3 +30,15 @@ map('n', '<C-Down>',  ':resize -2<CR>', opts)    -- decrease height
 map('n', '<C-Left>',  ':vertical resize -2<CR>', opts) -- decrease width
 map('n', '<C-Right>', ':vertical resize +2<CR>', opts) -- increase width
 
+map("n", "<leader>du", function() dapui.toggle() end, { noremap = true, silent = true, desc = "Toggle DAP UI" })
+
+map({ "n", "v" }, "<leader>dw", function() require("dapui").eval(nil, { enter = true }) end,
+  { noremap = true, silent = true, desc = "Add word under cursor to Watches" })
+
+map({ "n", "v" }, "Q", function() require("dapui").eval() end,
+  {
+    noremap = true,
+    silent = true,
+    desc =
+    "Hover/eval a single value (opens a tiny window instead of expanding the full object) "
+  })

@@ -70,3 +70,32 @@ vim.api.nvim_create_user_command("Zoxide", zoxide_select, {})
 -- optional keymap
 vim.keymap.set("n", "<leader>cp", zoxide_select, { desc = "Change PWD using zoxide" })
 
+require("neotest").setup({
+  adapters = {
+    require "neotest-dotnet",
+  },
+})
+-- https://emojipedia.org/en/stickers/search?q=circle
+vim.fn.sign_define('DapBreakpoint',
+  {
+  
+    text = '🔴',
+    texthl = 'DapBreakpointSymbol',
+    linehl = 'DapBreakpoint',
+    numhl = 'DapBreakpoint'
+  })
+
+vim.fn.sign_define('DapStopped',
+  {
+    text = '🟡',
+    texthl = 'yellow',
+    linehl = 'DapBreakpoint',
+    numhl = 'DapBreakpoint'
+  })
+vim.fn.sign_define('DapBreakpointRejected',
+  {
+    text = '⭕',
+    texthl = 'DapStoppedSymbol',
+    linehl = 'DapBreakpoint',
+    numhl = 'DapBreakpoint'
+  })

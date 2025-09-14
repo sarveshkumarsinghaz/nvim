@@ -202,4 +202,5 @@ return {
     'ramboe/ramboe-dotnet-utils',
     dependencies = { 'mfussenegger/nvim-dap' }
   },
+  {"ThePrimeagen/vim-be-good"}
 }

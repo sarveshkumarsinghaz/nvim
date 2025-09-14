@@ -31,44 +31,14 @@ dofile(vim.g.base46_cache .. "statusline")
 
 require "options"
 require "autocmds"
+require "addfile"
+require "tshell"
+require "zoxide"
 
 vim.schedule(function()
   require "mappings"
 end)
 
--- helper to get zoxide dirs
-local function zoxide_list()
-  local handle = io.popen("zoxide query -l")
-  if not handle then return {} end
-  local result = {}
-  for line in handle:lines() do
-    table.insert(result, line)
-  end
-  handle:close()
-  return result
-end
-
--- main function
-local function zoxide_select()
-  local dirs = zoxide_list()
-  if vim.tbl_isempty(dirs) then
-    print("No zoxide entries found")
-    return
-  end
-
-  vim.ui.select(dirs, { prompt = "Zoxide directories" }, function(choice)
-    if choice then
-      vim.cmd("cd " .. choice)
-      print("Changed directory to: " .. choice)
-    end
-  end)
-end
-
--- make it available as :Zoxide
-vim.api.nvim_create_user_command("Zoxide", zoxide_select, {})
-
--- optional keymap
-vim.keymap.set("n", "<leader>cp", zoxide_select, { desc = "Change PWD using zoxide" })
 
 require("neotest").setup({
   adapters = {
@@ -99,3 +69,4 @@ vim.fn.sign_define('DapBreakpointRejected',
     linehl = 'DapBreakpoint',
     numhl = 'DapBreakpoint'
   })
+

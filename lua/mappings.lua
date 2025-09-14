@@ -42,3 +42,27 @@ map({ "n", "v" }, "Q", function() require("dapui").eval() end,
     desc =
     "Hover/eval a single value (opens a tiny window instead of expanding the full object) "
   })
+map("n", "<leader>p", ":pwd<CR>", { desc = "Print working directory" })
+
+-- Core LSP
+  map("n", "gd", vim.lsp.buf.definition, {desc="Go to definition"})         
+  map("n", "gD", vim.lsp.buf.declaration, {desc="Go to declaration"})         
+  map("n", "gi", vim.lsp.buf.implementation, {desc="Go to implementation"})     
+  map("n", "grr", vim.lsp.buf.references, {desc="List references"})         
+  map("n", "K", vim.lsp.buf.hover, {desc="Hover docs"})         
+  map("n", "<C-k>", vim.lsp.buf.signature_help, {desc="signature help"})   
+
+  -- Code actions / Refactor
+  map("n", "<leader>rn", vim.lsp.buf.rename, {desc= "Rename Symbol"})      
+  map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {desc = "Code Action"})
+
+  -- Diagnostics
+  map("n", "gl", vim.diagnostic.open_float, {desc = "Show diagnostics popup"})       
+  map("n", "[d", vim.diagnostic.goto_prev, {desc ="Prev diagnostic"})       
+  map("n", "]d", vim.diagnostic.goto_next, {desc = "Next diagnostic"})      
+  map("n", "<leader>q", vim.diagnostic.setloclist, {desc = "Lsp diagnostics local list"})
+
+  -- Formatting
+  map("n", "<leader>f", function()
+    vim.lsp.buf.format { async = true }
+  end, opts)
